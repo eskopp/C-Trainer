@@ -1,0 +1,68 @@
+name: LaTeX to Nextcloud
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      
+      - name: Build PDF
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: main.tex
+          working_directory: C-Trainer     
+      
+      - name: Move File to Root Directory 
+        run: |
+          cp C-Trainer/main.pdf C-Trainer.pdf
+
+      - name: Upload PDF Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: C-Trainer
+          path: C-Trainer.pdf
+
+      - name: Install WebDAV client
+        run: sudo apt-get install -y davfs2
+
+      - name: Display File Tree
+        run: |
+          sudo apt-get install -y tree
+          tree
+
+      - name: Create and Upload PDF to Nextcloud
+        run: |
+          NEXTCLOUD_URL="${{ secrets.NEXTCLOUD_WEBDAV_URL }}/${{ secrets.NEXTCLOUD_PATH }}/"
+          USERNAME="${{ secrets.NEXTCLOUD_USERNAME }}"
+          PASSWORD="${{ secrets.NEXTCLOUD_PASSWORD }}"
+          PDF_FILE="C-Trainer.pdf"
+        
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" -u "$USERNAME:$PASSWORD" -T "$PDF_FILE" "$NEXTCLOUD_URL")
+
+          if [ $HTTP_STATUS -eq 201 ] || [ $HTTP_STATUS -eq 204 ]; then
+           echo "PDF-Datei wurde erfolgreich hochgeladen oder aktualisiert."
+          else
+           echo $HTTP_STATUS
+           exit 1
+          fi
+      
+      - name: Clean Up Compilation Directory
+        run: |
+          cd C-Trainer
+          rm -f *.aux *.log *.toc *.out *.synctex.gz *.bbl *.blg
+          cd ..
+
+      - name: Git Clean
+        run: |
+          git clean -fX
+          
