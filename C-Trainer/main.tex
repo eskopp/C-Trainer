@@ -15,21 +15,21 @@
 %%%%%%%%%%%%%%
 
 \logo{./resources/img/dsb_logo.jpg}
-\institute{Random University}
-\faculty{Faculty of Whatever Sciences}
-\department{Department of Anything but Psychology}
-\title{A sleek \LaTeX{} template}
-\subtitle{With a sleeker title-page}
-\author{\textit{Author}\\François \textsc{Rozet}}
-\supervisor{Linus \textsc{Torvalds}}
-\context{Well, I was bored...}	
+\institute{Deutscher Schachbund}
+\faculty{Thüringer Schachbund}
+\department{Referat Ausbildung}
+\title{Angriffe gegen den rochierten König}
+\subtitle{Eine Lehrprobe}
+\author{\textit{Author}\\ Erik Skopp}
+\supervisor{\textit{Lektor}\\A-Trainer Norbert Reichel}
+\context{C-Trainer Hausarbeit}	
 \date{\today}
 
 %%%%%%%%%%%%%%%%
 % Bibliography %
 %%%%%%%%%%%%%%%%
 
-% \addbibresource{./resources/bib/references.bib}
+\addbibresource{./resources/bib/references.bib}
 
 %%%%%%%%%%
 % Others %
@@ -143,7 +143,7 @@ It is also possible to write nested lists. Here follows a very condensed example
 
 \subsection{Figures}
 
-Thanks to the \texttt{graphicx} package, it is possible to include external graphic documents (images, plots, etc.) in your document with the \texttt{\tbs{}includegraphics} command. Most image type format (\texttt{jpg}, \texttt{png}, \texttt{bmp}, etc.) are supported by this command. However, it should be noted that it is highly preferable to use vectorial types, such as \texttt{pdf} or \texttt{eps}.
+Thanks to the \texttt{graphicx} package, it is possible ~\cite{lesk:1977} to include external graphic documents (images, plots, etc.) in your document with the \texttt{\tbs{}includegraphics} command. Most image type format (\texttt{jpg}, \texttt{png}, \texttt{bmp}, etc.) are supported by this command. However, it should be noted that it is highly preferable to use vectorial types, such as \texttt{pdf} or \texttt{eps}.
 
 
 \subsection{Tables}
@@ -203,9 +203,6 @@ The environments are \texttt{thm} (theorem), \texttt{lem} (lemma), \texttt{prop}
 
 In addition, these environments also have framed versions -- \texttt{framedthm}, \texttt{framedlem}, etc. -- for readability.
 
-\begin{framedthm}[Triangle inequality]\label{thm:Triangle inequality}
-	Let be a triangle in Euclidean space. Then the sum of the lengths of two of its sides always surpasses or equals the length of the third.
-\end{framedthm}
 
 \begin{framedprf}
 	Let $a$, $b$, and $c$ be the lengths of the sides of a triangle in Euclidean space and $\alpha$, $\beta$, $\gamma$ their respective opposite angles. By the generalized Pythagoras' theorem, we have
@@ -219,12 +216,11 @@ In addition, these environments also have framed versions -- \texttt{framedthm},
 \end{framedprf}
 
 \begin{framedquest*}
-	Based on the theorem \ref{thm:Triangle inequality}, what is the shortest path from a point $A$ to a point $B$ in Euclidean geometry?
+	Based on the theorem, what is the shortest path from a point $A$ to a point $B$ in Euclidean geometry?
 \end{framedquest*}
 
    
-
-%    \printbibliography
+\printbibliography
 
 
 \end{document}
